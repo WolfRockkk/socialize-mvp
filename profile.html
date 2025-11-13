@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Profile • Socialize</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Istok+Web:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Page CSS -->
+  <link rel="stylesheet" href="assets/css/profile.css">
+</head>
+<body>
+
+  <!-- NAVBAR (static) -->
+  <div class="navbar">
+    <div class="brand">
+      <div class="brand-badge"></div>
+      Socialize
+    </div>
+    <div class="tabs">
+      <div class="tab">Find Event</div>
+      <div class="tab active">My Profile</div>
+      <div class="tab">Create Event</div>
+      <div class="tab">Settings</div>
+    </div>
+  </div>
+
+  <div class="page">
+    <!-- LEFT COLUMN -->
+    <section>
+      <h2>My Profile</h2>
+
+      <div class="avatar-row">
+        <img id="avatar" class="avatar" src="https://picsum.photos/240/240?grayscale&random=2" alt="Profile picture"/>
+        <label class="edit-pic">
+          <input id="avatarInput" type="file" accept="image/*" hidden />
+          <span>Edit Picture ✎</span>
+        </label>
+      </div>
+
+      <div class="card" style="margin-top:18px">
+        <h3>Main Information</h3>
+        <div class="kv">
+          <label>Name:</label>
+          <input readonly value="Ivan Zolo">
+          <label>Email:</label>
+          <input readonly value="trololo228@gmail.com">
+          <label>Username:</label>
+          <input readonly value="@Egorpomidor228">
+          <label>City:</label>
+          <input readonly value="Ottawa">
+        </div>
+      </div>
+
+      <div class="card bio-card">
+        <div class="bio-head">
+          <h3>Bio</h3>
+          <div class="bio-actions">
+            <a id="bioEdit">Edit</a>
+          </div>
+        </div>
+
+        <!-- Preferences -->
+        <div>
+          <div class="about-label">Preferences:</div>
+          <div id="chips" class="chips"></div>
+        </div>
+
+        <!-- About me -->
+        <div class="about-label">About Me:</div>
+        <div id="bioView" class="bio-block">
+          <div id="bioText" class="about-text">
+            Development of endpoints for creating, editing, deleting, and joining events. Supports both public and invite-only events. Ensures secure access control and validation.
+          </div>
+        </div>
+
+        <div id="bioEditBox" style="display:none">
+          <textarea id="bioTextarea" class="about-edit"></textarea>
+          <div class="edit-row">
+            <button class="btn save" id="bioSave">Save</button>
+            <button class="btn cancel" id="bioCancel">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CENTER ILLUSTRATION -->
+    <section class="center-illu">
+      <img src="assets/images/3.png" alt="Friends illustration (placeholder)">
+    </section>
+
+    <!-- RIGHT COLUMN: Connections -->
+    <aside class="panel">
+      <h3>My Connections</h3>
+
+      <div class="conn-item">
+        <img src="https://picsum.photos/100/100?random=10" alt="">
+        <div>
+          <div class="conn-name">Valera Valerovich</div>
+          <div class="conn-meta">Ottawa, ON</div>
+        </div>
+        <div class="conn-actions">
+          <button class="btn view">View</button>
+          <button class="btn remove">Remove</button>
+        </div>
+      </div>
+
+      <div class="conn-item">
+        <img src="https://picsum.photos/100/100?random=11" alt="">
+        <div>
+          <div class="conn-name">Perun Svarogov</div>
+          <div class="conn-meta">Toronto, ON</div>
+        </div>
+        <div class="conn-actions">
+          <button class="btn view">View</button>
+          <button class="btn remove">Remove</button>
+        </div>
+      </div>
+
+      <div class="conn-item">
+        <img src="https://picsum.photos/100/100?random=12" alt="">
+        <div>
+          <div class="conn-name">Aleksey Berezin</div>
+          <div class="conn-meta">Ottawa, ON</div>
+        </div>
+        <div class="conn-actions">
+          <button class="btn view">View</button>
+          <button class="btn remove">Remove</button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Preferences Modal -->
+  <div id="prefModal" class="modal" aria-hidden="true">
+    <div class="modal-card">
+      <h3 class="modal-h">Edit Preferences</h3>
+      <div id="prefList" class="pref-grid"></div>
+      <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:10px">
+        <button id="prefClose" class="btn cancel">Close</button>
+        <button id="prefApply" class="btn save">Apply</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global auth / redirects -->
+  <script type="module" src="assets/js/main.js"></script>
+  <!-- Page-specific UI logic -->
+  <script src="assets/js/profile.js"></script>
+</body>
+</html>
