@@ -35,6 +35,10 @@ body{
 }
 .brand{
   display:flex; align-items:center; gap:10px; font-weight:700; color:#111;
+  font-family: "Bungee Shade", sans-serif;
+  font-weight: 600;
+  font-size: 40px;  
+  color: #1c2b5a;
 }
 .brand-badge{
   width:22px; height:22px;
@@ -43,10 +47,11 @@ body{
 }
 .tabs{
   margin-left:auto;
-  display:flex; gap:14px; align-items:center;
+  display:flex;  align-items:center;
+
 }
 .tab{
-  padding:10px 16px; border-radius:999px; background:rgba(255,255,255,.35);
+  padding:10px 16px; border-radius:0  0 20px 20px; background:rgba(255,255,255,.35);
   font-weight:700; color:#1a1a1a; cursor:pointer; border:2px solid rgba(0,0,0,.06);
 }
 .tab.active{ background:#ffe09b; border-color:#e3b34d; box-shadow:var(--soft-shadow-sm)}
