@@ -1,3 +1,15 @@
+/* Make padding count inside the viewport height */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
 body {
   margin: 0;
   font-family: "Istok Web", sans-serif;
@@ -7,14 +19,15 @@ body {
   position: relative;
 }
 
+/* MAIN WRAPPER – fits exactly in the viewport */
 .container {
   max-width: 1600px;
   margin: 0 auto;
-  padding: 60px 140px;
+  padding: 40px 140px;        /* was 60px, reduced to fit height */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 100vh;
+  height: 100vh;              /* instead of min-height */
   position: relative;
   z-index: 3;
 }
@@ -29,34 +42,34 @@ body {
   font-size: 64px;
   font-family: "Bungee Shade", sans-serif;
   color: #1c2b5a;
-  margin-bottom: 45px;
+  margin-bottom: 32px;        /* was 45px */
   letter-spacing: 2px;
 }
 
 h1 {
-  font-size: 42px;
+  font-size: 40px;            /* slightly reduced from 42px */
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .subtitle {
-  font-size: 19px;
+  font-size: 18px;            /* was 19px */
   line-height: 1.6;
   color: #3a4b7b;
-  margin-bottom: 32px;
+  margin-bottom: 28px;        /* was 32px */
 }
 
 .btn-group {
   display: flex;
   gap: 16px;
-  margin-bottom: 40px;
+  margin-bottom: 32px;        /* was 40px */
 }
 
 .btn {
-  padding: 12px 34px;
+  padding: 12px 30px;
   border-radius: 25px;
   border: none;
-  font-size: 17px;
+  font-size: 16px;
   cursor: pointer;
   transition: transform 0.15s ease;
 }
@@ -77,13 +90,13 @@ h1 {
 
 .stats {
   display: flex;
-  gap: 70px;
+  gap: 60px;                  /* was 70px */
 }
 
 .stat-item .num {
-  font-size: 30px;
+  font-size: 28px;            /* was 30px */
   font-weight: 700;
-  margin-bottom: 6px;
+  margin-bottom: 4px;         /* was 6px */
 }
 
 /* RIGHT SIDE IMAGES */
@@ -92,24 +105,24 @@ h1 {
   flex-grow: 1;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  padding-right: 80px;
+  align-items: center;        /* center inside the available height */
+  padding-right: 60px;        /* was 80px */
   z-index: 3;
 }
 
 .main-illustration {
-  width: 900px;
+  width: 620px;               /* was 900px */
+  max-width: 100%;
   height: auto;
-  max-width: none;
   z-index: 3;
-  transform: translateY(-35px);
+  transform: none;            /* remove translateY that pushed it up */
 }
 
 .side-illustration {
   position: absolute;
-  width: 520px;
+  width: 380px;               /* was 520px */
   height: auto;
-  bottom: -120px;
-  right: -140px;
+  bottom: 0;                  /* keep it inside the viewport */
+  right: -40px;               /* softer offset than -140px */
   z-index: 2;
 }
