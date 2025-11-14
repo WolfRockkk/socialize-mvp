@@ -8,52 +8,66 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Istok+Web:wght@400;700&display=swap" rel="stylesheet">
 
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="logo.ico" />
+
   <!-- Page CSS -->
   <link rel="stylesheet" href="assets/css/profile.css">
 </head>
 <body>
 
-  <!-- NAVBAR (static) -->
+  <!-- NAVBAR -->
   <div class="navbar">
     <div class="brand">
       <div class="brand-badge"></div>
       Socialize
     </div>
     <div class="tabs">
-      <div class="tab">Find Event</div>
-      <div class="tab active">My Profile</div>
-      <div class="tab">Create Event</div>
-      <div class="tab">Settings</div>
+      <div class="tab" onclick="window.location.href='find-event.html'">Find Event</div>
+      <div class="tab active" onclick="window.location.href='profile.html'">My Profile</div>
+      <div class="tab" onclick="window.location.href='create-event.html'">Create Event</div>
+      <div class="tab" onclick="window.location.href='settings.html'">Settings</div>
     </div>
   </div>
 
   <div class="page">
+
     <!-- LEFT COLUMN -->
     <section>
       <h2>My Profile</h2>
 
       <div class="avatar-row">
-        <img id="avatar" class="avatar" src="https://picsum.photos/240/240?grayscale&random=2" alt="Profile picture"/>
+        <!-- Avatar loaded from Firebase -->
+        <img id="avatar" class="avatar" alt="Profile picture">
+
+
         <label class="edit-pic">
           <input id="avatarInput" type="file" accept="image/*" hidden />
           <span>Edit Picture ✎</span>
         </label>
       </div>
 
+      <!-- MAIN INFORMATION -->
       <div class="card" style="margin-top:18px">
         <h3>Main Information</h3>
         <div class="kv">
+
           <label>Name:</label>
-          <input readonly value="Ivan Zolo">
+          <input id="profile-name" readonly value="Loading...">
+
           <label>Email:</label>
-          <input readonly value="trololo228@gmail.com">
+          <input id="profile-email" readonly value="Loading...">
+
           <label>Username:</label>
-          <input readonly value="@Egorpomidor228">
+          <input id="profile-username" readonly value="Loading...">
+
           <label>City:</label>
-          <input readonly value="Ottawa">
+          <input id="profile-city" readonly value="Loading...">
+
         </div>
       </div>
 
+      <!-- BIO -->
       <div class="card bio-card">
         <div class="bio-head">
           <h3>Bio</h3>
@@ -68,12 +82,11 @@
           <div id="chips" class="chips"></div>
         </div>
 
-        <!-- About me -->
+        <!-- About Me -->
         <div class="about-label">About Me:</div>
+
         <div id="bioView" class="bio-block">
-          <div id="bioText" class="about-text">
-            Development of endpoints for creating, editing, deleting, and joining events. Supports both public and invite-only events. Ensures secure access control and validation.
-          </div>
+          <div id="bioText" class="about-text">Loading...</div>
         </div>
 
         <div id="bioEditBox" style="display:none">
@@ -88,13 +101,14 @@
 
     <!-- CENTER ILLUSTRATION -->
     <section class="center-illu">
-      <img src="assets/images/3.png" alt="Friends illustration (placeholder)">
+      <img src="assets/images/3.png" alt="Friends illustration">
     </section>
 
     <!-- RIGHT COLUMN: Connections -->
     <aside class="panel">
       <h3>My Connections</h3>
 
+      <!-- Placeholder connection items (real system later) -->
       <div class="conn-item">
         <img src="https://picsum.photos/100/100?random=10" alt="">
         <div>
@@ -131,6 +145,7 @@
         </div>
       </div>
     </aside>
+
   </div>
 
   <!-- Preferences Modal -->
@@ -138,6 +153,7 @@
     <div class="modal-card">
       <h3 class="modal-h">Edit Preferences</h3>
       <div id="prefList" class="pref-grid"></div>
+
       <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:10px">
         <button id="prefClose" class="btn cancel">Close</button>
         <button id="prefApply" class="btn save">Apply</button>
@@ -145,9 +161,11 @@
     </div>
   </div>
 
-  <!-- Global auth / redirects -->
+  <!-- Firebase -->
   <script type="module" src="assets/js/main.js"></script>
-  <!-- Page-specific UI logic -->
-  <script src="assets/js/profile.js"></script>
+
+  <!-- Page-specific logic -->
+  <script type="module" src="assets/js/profile.js"></script>
+
 </body>
 </html>

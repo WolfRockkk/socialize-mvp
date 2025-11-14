@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Settings • Socialize</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Istok+Web:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="logo.ico" />
+
+  <!-- Page CSS -->
+  <link rel="stylesheet" href="assets/css/settings.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <div class="navbar">
+    <div class="brand">
+      <div class="brand-badge"></div>
+      Socialize
+    </div>
+    <div class="tabs">
+      <div class="tab" onclick="window.location.href='find-event.html'">Find Event</div>
+      <div class="tab" onclick="window.location.href='profile.html'">My Profile</div>
+      <div class="tab" onclick="window.location.href='create-event.html'">Create Event</div>
+      <div class="tab active" onclick="window.location.href='settings.html'">Settings</div>
+    </div>
+  </div>
+
+  <main class="settings-page">
+    <h1 class="settings-title">Settings</h1>
+
+    <!-- ACCOUNT SETTINGS CARD -->
+    <section class="card settings-card">
+      <h2 class="card-title">Account Settings</h2>
+
+      <div class="settings-rows">
+
+        <!-- NAME -->
+        <div class="settings-row">
+          <span class="settings-label">Name:</span>
+          <input id="settings-name" class="settings-input" type="text" readonly value="Loading..." />
+          <button class="change-link" data-field="name">Change</button>
+        </div>
+
+        <!-- EMAIL -->
+        <div class="settings-row">
+          <span class="settings-label">Email:</span>
+          <input id="settings-email" class="settings-input" type="email" readonly value="Loading..." />
+          <!-- IMPORTANT: no data-field here, but has change-link for styling -->
+          <button id="changeEmailBtn" class="change-link">Change</button>
+        </div>
+
+        <!-- USERNAME -->
+        <div class="settings-row">
+          <span class="settings-label">Username:</span>
+          <input id="settings-username" class="settings-input" type="text" readonly value="Loading..." />
+          <button class="change-link" data-field="username">Change</button>
+        </div>
+
+        <!-- CITY -->
+        <div class="settings-row">
+          <span class="settings-label">City:</span>
+          <input id="settings-city" class="settings-input" type="text" readonly value="Loading..." />
+          <button class="change-link" data-field="city">Change</button>
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="settings-row">
+          <span class="settings-label">Password:</span>
+          <input class="settings-input" type="password" value="***************" readonly />
+          <button class="change-link" data-field="password">Change</button>
+        </div>
+
+      </div>
+
+      <div class="settings-footer">
+        <button id="logoutBtn" class="btn btn-secondary">Log out</button>
+        <button id="delete-account" class="btn btn-danger">Delete account</button>
+      </div>
+
+      <div id="settings-status" class="settings-status"></div>
+    </section>
+  </main>
+
+  <!-- GENERAL MODAL (name, username, city, password) -->
+  <div id="settingsModal" class="modal" aria-hidden="true">
+    <div class="modal-card">
+      <h3 id="modal-title" class="modal-title">Edit</h3>
+
+      <form id="modal-form">
+        <div id="modal-body"></div>
+
+        <div class="modal-footer">
+          <button type="button" id="modal-cancel" class="btn btn-light">Cancel</button>
+          <button type="submit" id="modal-save" class="btn btn-primary">Save</button>
+        </div>
+
+        <div id="modal-error" class="modal-error"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- EMAIL CHANGE MODAL (dedicated, with proper classes) -->
+  <div id="emailModal" class="modal" aria-hidden="true">
+    <div class="modal-card small">
+      <h3 class="modal-title">Change Email</h3>
+
+      <div class="modal-field">
+        <label class="modal-label">New Email</label>
+        <input type="email" id="newEmail" class="modal-input">
+      </div>
+
+      <div class="modal-field">
+        <label class="modal-label">Current Password</label>
+        <input type="password" id="emailPassword" class="modal-input">
+      </div>
+
+      <div class="modal-footer">
+        <button id="emailCancel" class="btn btn-light">Cancel</button>
+        <button id="emailSave" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase init (auth, db on window) -->
+  <script type="module" src="assets/js/main.js"></script>
+  <!-- Page-specific logic -->
+  <script type="module" src="assets/js/settings.js"></script>
+</body>
+</html>
