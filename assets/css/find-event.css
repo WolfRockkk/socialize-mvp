@@ -1,0 +1,459 @@
+/* =====================
+   GLOBAL RESET & BASE
+   ===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Istok Web', sans-serif;
+  background: #F5EBE0;
+  min-height: 100vh;
+  color: #003D5B;
+}
+
+/* =====================
+   NAVBAR (Same as Create Event)
+   ===================== */
+.navbar {
+  background: #003D5B;
+  padding: 20px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 50px 75px;
+  border-radius: 30px;
+  box-shadow: 0 8px 30px rgba(0, 61, 91, 0.3);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+  
+}
+
+.brand-badge {
+  width: 45px;
+  height: 45px;
+  background: #F5A623;
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 0 0 4px rgba(245, 166, 35, 0.3);
+}
+
+.brand-badge::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background: #003D5B;
+  border-radius: 50%;
+}
+
+.tabs {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.tab {
+  padding: 12px 28px;
+  background: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  color: white;
+  font-size: 1.1rem;
+  position: relative;
+}
+
+.tab:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.tab.active {
+  background: transparent;
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 3px;
+  background: #F5A623;
+  border-radius: 2px;
+}
+
+/* =====================
+   PAGE LAYOUT
+   ===================== */
+.page-find {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 50px 75px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: start;
+}
+
+.find-left h2,
+.find-right h2 {
+  color: #003D5B;
+  font-size: 3rem;
+  margin-bottom: 40px;
+  font-weight: 700;
+}
+
+/* =====================
+   CARDS
+   ===================== */
+.card {
+  background: white;
+  border-radius: 30px;
+  padding: 40px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* =====================
+   SEARCH CARD
+   ===================== */
+.search-card {
+  margin-bottom: 30px;
+}
+
+.search-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.search-input-wrap {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 20px;
+  font-size: 1.3rem;
+  pointer-events: none;
+}
+
+.search-input-wrap input {
+  width: 100%;
+  padding: 18px 20px 18px 55px;
+  border: 2px solid #E0E0E0;
+  border-radius: 12px;
+  background: white;
+  font-family: 'Istok Web', sans-serif;
+  font-size: 1.05rem;
+  color: #003D5B;
+  transition: all 0.3s ease;
+}
+
+.search-input-wrap input:focus {
+  outline: none;
+  border-color: #003D5B;
+  box-shadow: 0 0 0 4px rgba(0, 61, 91, 0.08);
+}
+
+.search-input-wrap input::placeholder {
+  color: #8BA3B3;
+}
+
+.search-btn {
+  padding: 18px 35px;
+  border: none;
+  border-radius: 12px;
+  background: #F5A623;
+  color: white;
+  font-family: 'Istok Web', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(245, 166, 35, 0.3);
+  white-space: nowrap;
+}
+
+.search-btn:hover {
+  background: #E89610;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 166, 35, 0.4);
+}
+
+/* =====================
+   FILTERS
+   ===================== */
+.filter-row {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filter-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.filter-label {
+  color: #003D5B;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.chip {
+  padding: 10px 20px;
+  border: 2px solid #E0E0E0;
+  border-radius: 25px;
+  background: white;
+  color: #003D5B;
+  font-family: 'Istok Web', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.chip:hover:not(.disabled) {
+  border-color: #003D5B;
+  transform: translateY(-1px);
+}
+
+.chip-active {
+  background: #003D5B;
+  color: white;
+  border-color: #003D5B;
+}
+
+.chip.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#sort-city {
+  padding: 10px 20px;
+  border: 2px solid #E0E0E0;
+  border-radius: 12px;
+  background: white;
+  font-family: 'Istok Web', sans-serif;
+  font-size: 0.95rem;
+  color: #003D5B;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#sort-city:focus {
+  outline: none;
+  border-color: #003D5B;
+  box-shadow: 0 0 0 3px rgba(0, 61, 91, 0.08);
+}
+
+/* =====================
+   EVENT LIST
+   ===================== */
+.event-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.event-card {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+}
+
+.event-main {
+  margin-bottom: 15px;
+}
+
+.event-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.event-arrow {
+  color: #003D5B;
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.event-card:hover .event-arrow {
+  transform: translateX(3px);
+}
+
+.event-title {
+  color: #003D5B;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.event-meta-row {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-left: 30px;
+}
+
+.event-date,
+.event-location {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #5A6C7A;
+  font-size: 1rem;
+}
+
+.event-date-icon {
+  font-size: 1.1rem;
+}
+
+.event-tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-left: 30px;
+}
+
+.tag-pill {
+  padding: 8px 18px;
+  background: #003D5B;
+  color: white;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* =====================
+   MAP SECTION
+   ===================== */
+.map-card {
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+#map {
+  width: 100%;
+  height: 500px;
+  border-radius: 20px;
+  background: #F5EBE0;
+  overflow: hidden;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-hint {
+  margin-top: 20px;
+  padding: 20px;
+  background: #F9F9F9;
+  border-radius: 15px;
+  font-size: 0.95rem;
+  color: #666;
+  border: 2px solid #E0E0E0;
+  text-align: center;
+}
+
+/* =====================
+   RESPONSIVE DESIGN
+   ===================== */
+@media (max-width: 1200px) {
+  .page-find {
+    grid-template-columns: 1fr;
+    padding: 40px 50px;
+  }
+  
+  .navbar {
+    margin: 40px 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 25px;
+    padding: 25px 30px;
+    margin: 30px 20px;
+  }
+  
+  .tabs {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .tab {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+  
+  .brand {
+    font-size: 1.6rem;
+  }
+  
+  .find-left h2,
+  .find-right h2 {
+    font-size: 2.2rem;
+  }
+  
+  .page-find {
+    padding: 30px 20px;
+  }
+  
+  .card {
+    padding: 25px;
+  }
+  
+  .search-row {
+    flex-direction: column;
+  }
+  
+  .search-btn {
+    width: 100%;
+  }
+  
+  .filter-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .event-meta-row {
+    margin-left: 0;
+  }
+  
+  .event-tags {
+    margin-left: 0;
+  }
+}

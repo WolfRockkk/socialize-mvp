@@ -153,3 +153,78 @@ input {
   transform: translateY(-2px);
   cursor: pointer;
 }
+
+/* Google Sign-In Button */
+.btn-google {
+  width: 100%;
+  padding: 14px;
+  margin-top: 15px;
+  background: white;
+  color: #1c2b5a;
+  border: 2px solid #d6d6d6;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-family: 'Istok Web', sans-serif;
+}
+
+.btn-google:hover {
+  background: #f8f8f8;
+  border-color: #1c2b5a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-google svg {
+  flex-shrink: 0;
+}
+
+/* OR Divider for signup.html */
+.or-divider {
+  display: flex;
+  align-items: center;
+  margin: 25px 0 10px 0;
+  color: #666;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.or-divider::before,
+.or-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #ccc;
+}
+
+.or-divider span {
+  padding: 0 15px;
+}
+
+/* Resend Button Styling (for login.html) */
+.btn-resend {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  background: #F5A623;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-family: 'Istok Web', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-resend:hover {
+  background: #E89610;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(245, 166, 35, 0.4);
+}

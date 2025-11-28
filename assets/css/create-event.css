@@ -1,0 +1,358 @@
+/* =====================
+   GLOBAL RESET & BASE
+   ===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Istok Web', sans-serif;
+  background: #F5EBE0;
+  min-height: 100vh;
+  color: #003D5B;
+}
+
+/* =====================
+   NAVBAR
+   ===================== */
+.navbar {
+  background: #003D5B;
+  padding: 20px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 50px 75px;
+  border-radius: 30px;
+  box-shadow: 0 8px 30px rgba(0, 61, 91, 0.3);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.brand-badge {
+  width: 45px;
+  height: 45px;
+  background: #F5A623;
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 0 0 4px rgba(245, 166, 35, 0.3);
+}
+
+.brand-badge::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background: #003D5B;
+  border-radius: 50%;
+}
+
+.tabs {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.tab {
+  padding: 12px 28px;
+  background: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  color: white;
+  font-size: 1.1rem;
+  position: relative;
+}
+
+.tab:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.tab.active {
+  background: transparent;
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 3px;
+  background: #F5A623;
+  border-radius: 2px;
+}
+
+/* =====================
+   PAGE LAYOUT
+   ===================== */
+.page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 50px 75px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: start;
+}
+
+section h2 {
+  color: #003D5B;
+  font-size: 3rem;
+  margin-bottom: 40px;
+  font-weight: 700;
+}
+
+/* =====================
+   CARDS
+   ===================== */
+.card {
+  background: white;
+  border-radius: 30px;
+  padding: 50px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+.form-card {
+  background: white;
+}
+
+.map-card {
+  background: white;
+  min-height: 790px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card h3 {
+  color: #003D5B;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+/* =====================
+   FORM STYLING
+   ===================== */
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+
+.form-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-item label {
+  color: #003D5B;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.form-item input,
+.form-item select {
+  padding: 18px 20px;
+  border: 2px solid #E0E0E0;
+  border-radius: 12px;
+  background: white;
+  font-family: 'Istok Web', sans-serif;
+  font-size: 1.05rem;
+  color: #003D5B;
+  transition: all 0.3s ease;
+}
+
+.form-item input:focus,
+.form-item select:focus {
+  outline: none;
+  border-color: #003D5B;
+  box-shadow: 0 0 0 4px rgba(0, 61, 91, 0.08);
+}
+
+.form-item input::placeholder {
+  color: #8BA3B3;
+}
+
+/* Date input styling */
+.form-item input[type="date"] {
+  position: relative;
+  background: white;
+  cursor: pointer;
+}
+
+.form-item input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #003D5B;
+}
+
+/* Autocomplete wrapper styling */
+.autocomplete-wrapper {
+  position: relative;
+}
+
+.autocomplete-wrapper input {
+  width: 100%;
+}
+
+/* =====================
+   BUTTONS
+   ===================== */
+.form-actions {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 16px 45px;
+  border: none;
+  border-radius: 50px;
+  font-family: 'Istok Web', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn.primary {
+  background: #F5A623;
+  color: white;
+  box-shadow: 0 6px 20px rgba(245, 166, 35, 0.4);
+}
+
+.btn.primary:hover {
+  background: #E89610;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(245, 166, 35, 0.5);
+}
+
+.btn.primary:active {
+  transform: translateY(-1px);
+}
+
+/* =====================
+   MAP CONTAINER
+   ===================== */
+#map {
+  width: 100%;
+  height: 500px;
+  border-radius: 20px;
+  background: #F5EBE0;
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+.debug-box {
+  margin-top: 20px;
+  padding: 20px;
+  background: #F9F9F9;
+  border-radius: 15px;
+  font-size: 0.95rem;
+  color: #666;
+  border: 2px solid #E0E0E0;
+}
+/* Description textarea */
+.event-description-input {
+  width: 100%;
+  padding: 14px 18px;
+  border: 2px solid #E0E0E0;
+  border-radius: 12px;
+  background: white;
+  font-family: 'Istok Web', sans-serif;
+  font-size: 1rem;
+  color: #003D5B;
+  resize: vertical;
+  min-height: 100px;
+  transition: all 0.3s ease;
+}
+
+.event-description-input:focus {
+  outline: none;
+  border-color: #003D5B;
+  box-shadow: 0 0 0 4px rgba(0, 61, 91, 0.08);
+}
+
+.event-description-input::placeholder {
+  color: #8BA3B3;
+}
+
+.char-count {
+  display: block;
+  text-align: right;
+  font-size: 0.85rem;
+  color: #5A6C7A;
+  margin-top: 5px;
+}
+
+/* =====================
+   RESPONSIVE DESIGN
+   ===================== */
+@media (max-width: 1200px) {
+  .page {
+    grid-template-columns: 1fr;
+    padding: 40px 50px;
+  }
+  
+  .navbar {
+    margin: 40px 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 25px;
+    padding: 25px 30px;
+    margin: 30px 20px;
+  }
+  
+  .tabs {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .tab {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+  
+  .brand {
+    font-size: 1.6rem;
+  }
+  
+  section h2 {
+    font-size: 2.2rem;
+  }
+  
+  .page {
+    padding: 30px 20px;
+  }
+  
+  .card {
+    padding: 30px;
+  }
+  
+  .card h3 {
+    font-size: 1.6rem;
+  }
+  
+  .form-grid {
+    gap: 25px;
+  }
+}

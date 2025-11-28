@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Create Event • Socialize</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="logo.ico" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Istok+Web:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Optional favicon if you want -->
+  <!-- <link rel="shortcut icon" type="image/x-icon" href="logo.ico" /> -->
+
+  <!-- Page CSS -->
+  <link rel="stylesheet" href="/assets/css/create-event.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <div class="navbar">
+    <div class="brand">
+      <div class="brand-badge"></div>
+      Socialize
+    </div>
+    <div class="tabs">
+      <div class="tab" onclick="window.location.href='find-event.html'">Find Event</div>
+      <div class="tab " onclick="window.location.href='profile.html'">My Profile</div>
+      <div class="tab active" onclick="window.location.href='create-event.html'">Create Event</div>
+      <div class="tab" onclick="window.location.href='settings.html'">Settings</div>
+    </div>
+  </div>
+
+  <!-- PAGE LAYOUT -->
+  <div class="page">
+
+    <!-- LEFT: FORM -->
+    <section>
+      <h2>Create Event</h2>
+
+      <div class="card form-card">
+        <h3>Event Details</h3>
+
+        <form id="event-form" class="form-grid">
+
+          <div class="form-item">
+            <label for="event-name">Event Name</label>
+            <input id="event-name" type="text" placeholder="Board Games Night" required>
+          </div>
+
+          <div class="form-item">
+            <label for="max-participants">Max Participants (1–10)</label>
+            <select id="max-participants" required>
+              <option value="">Select…</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+
+          <div class="form-item">
+            <label for="event-date">Date</label>
+            <input id="event-date" type="date" required>
+          </div>
+
+          <div class="form-item form-item-wide">
+            <label>Address</label>
+            <div id="address-autocomplete" class="autocomplete-wrapper"></div>
+            <input type="hidden" id="event-address-value">
+          </div>
+
+                    <div class="form-item form-item-wide">
+            <label for="event-description">Description</label>
+              <textarea 
+              id="event-description" 
+              class="event-description-input" 
+              placeholder="Tell people what this event is about..."
+              rows="4"
+              maxlength="500"></textarea>
+              <span class="char-count">0/500</span>
+        </div>
+
+          <div class="form-actions">
+            <button id="submit-btn" type="submit" class="btn primary">Save</button>
+          </div>
+
+        </form>
+      </div>
+    </section>
+
+    <!-- RIGHT: MAP -->
+    <section>
+      <h2>Location Preview</h2>
+      <div class="card map-card">
+        <div id="map"></div>
+        <div id="debug" class="debug-box"></div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Your JS -->
+    <script type="module" src="assets/js/main.js"></script>
+  <!-- Auth Guard -->
+  <script type="module" src="assets/js/auth-guard.js"></script>
+  <script type="module" src="assets/js/create-event.js"></script>
+
+  <!-- Google Maps JS (use your working key here) -->
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqqWeX_gf0uPwfJInrEO4urYpW8IngRzs&callback=initMap&loading=async"
+    
+    async
+  ></script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Find Event • Socialize</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Istok+Web:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="logo.ico" />
+
+  <!-- Page CSS -->
+  <link rel="stylesheet" href="assets/css/find-event.css">
+</head>
+<body>
+
+  <!-- NAVBAR (same as profile, Find Event active) -->
+  <div class="navbar">
+    <div class="brand">
+      <div class="brand-badge"></div>
+      Socialize
+    </div>
+    <div class="tabs">
+      <div class="tab active" onclick="window.location.href='find-event.html'">Find Event</div>
+      <div class="tab" onclick="window.location.href='profile.html'">My Profile</div>
+      <div class="tab" onclick="window.location.href='create-event.html'">Create Event</div>
+      <div class="tab" onclick="window.location.href='settings.html'">Settings</div>
+    </div>
+  </div>
+
+  <!-- PAGE LAYOUT -->
+  <div class="page page-find">
+
+    <!-- LEFT: SEARCH + LIST -->
+    <section class="find-left">
+      <h2>Find Event</h2>
+
+      <!-- Search + filters -->
+      <div class="card search-card">
+        <div class="search-row">
+          <div class="search-input-wrap">
+            <span class="search-icon">🔍</span>
+            <input
+              id="search-query"
+              type="text"
+              placeholder="Search by event name, tags or city..."
+            />
+          </div>
+          <button class="btn search-btn">Search</button>
+        </div>
+
+        <div class="filter-row">
+          <div class="filter-block">
+            <span class="filter-label">Type:</span>
+            <button class="chip chip-toggle chip-active">All</button>
+            <button class="chip chip-toggle">Public</button>
+            <button class="chip chip-toggle disabled">Friends (later)</button>
+          </div>
+          <div class="filter-block">
+            <span class="filter-label">Sort:</span>
+            <select id="sort-city">
+              <option>Ottawa</option>
+              <option>Toronto</option>
+              <option>Montreal</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Event list (dummy data for now) -->
+      <div class="event-list">
+
+        <!-- EVENT CARD 1 -->
+        <article class="event-card">
+          <div class="event-main">
+            <div class="event-title-row">
+              <span class="event-arrow">▾</span>
+              <h3 class="event-title">Board Games &amp; Drinks – This Saturday</h3>
+            </div>
+            <div class="event-meta-row">
+              <div class="event-date">
+                <span class="event-date-icon">📅</span>
+                <span>Nov 28, 2025 • 19:00</span>
+              </div>
+              <div class="event-location">
+                <span>Ottawa, ON</span>
+              </div>
+            </div>
+          </div>
+          <div class="event-tags">
+            <span class="tag-pill">Games</span>
+            <span class="tag-pill">Drinks</span>
+            <span class="tag-pill">Networking</span>
+          </div>
+        </article>
+
+        <!-- EVENT CARD 2 -->
+        <article class="event-card">
+          <div class="event-main">
+            <div class="event-title-row">
+              <span class="event-arrow">▾</span>
+              <h3 class="event-title">Morning Coffee &amp; Language Exchange</h3>
+            </div>
+            <div class="event-meta-row">
+              <div class="event-date">
+                <span class="event-date-icon">📅</span>
+                <span>Dec 3, 2025 • 10:30</span>
+              </div>
+              <div class="event-location">
+                <span>Downtown Ottawa</span>
+              </div>
+            </div>
+          </div>
+          <div class="event-tags">
+            <span class="tag-pill">Coffee</span>
+            <span class="tag-pill">Languages</span>
+            <span class="tag-pill">Chatting</span>
+          </div>
+        </article>
+
+        <!-- EVENT CARD 3 -->
+        <article class="event-card">
+          <div class="event-main">
+            <div class="event-title-row">
+              <span class="event-arrow">▾</span>
+              <h3 class="event-title">Sunday Walk &amp; Photo Meetup</h3>
+            </div>
+            <div class="event-meta-row">
+              <div class="event-date">
+                <span class="event-date-icon">📅</span>
+                <span>Dec 7, 2025 • 14:00</span>
+              </div>
+              <div class="event-location">
+                <span>Rideau Canal, Ottawa</span>
+              </div>
+            </div>
+          </div>
+          <div class="event-tags">
+            <span class="tag-pill">Outdoors</span>
+            <span class="tag-pill">Photography</span>
+            <span class="tag-pill">Walking</span>
+          </div>
+        </article>
+    
+      </div>
+    </section>
+
+    
+
+    <!-- RIGHT: MAP -->
+    <section class="find-right">
+      <h2>Events in My Location</h2>
+
+      <div class="card map-card">
+        <div id="map"> <!-- Google Map goes here later --> </div>
+        <div class="map-hint">
+          Map preview. Later you’ll show nearby events as pins here using your Google Maps API.
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Optional JS for future map / filters -->
+  <script type="module" src="assets/js/main.js"></script>
+  <!-- Auth Guard -->
+  <script type="module" src="assets/js/auth-guard.js"></script>
+  <script type="module"  src="assets/js/find-event.js"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqqWeX_gf0uPwfJInrEO4urYpW8IngRzs&callback=initMap&loading=async"
+    async
+  ></script>
+
+</body>
+</html>
