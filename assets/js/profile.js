@@ -426,6 +426,9 @@ onAuthStateChanged(auth, async (user) => {
     // ---------- Load User's Events ----------
     await loadUserEvents(user.uid);
 
+    // ---------- Load Joined Events ----------
+    await loadJoinedEvents(user.uid);
+
   } catch (err) {
     console.error("Error loading profile:", err);
   }
@@ -442,11 +445,26 @@ async function loadUserEvents(userId) {
     const eventsRef = collection(db, "events");
     const q = query(
       eventsRef, 
-      where("creatorId", "==", userId),
-      orderBy("date", "asc")
+      where("creatorId", "==", userId)
     );
     
     const querySnapshot = await getDocs(q);
+    
+    // Sort events by date in JavaScript (to avoid needing a Firestore index)
+    const events = [];
+    querySnapshot.forEach((docSnap) => {
+      events.push({
+        id: docSnap.id,
+        data: docSnap.data()
+      });
+    });
+    
+    // Sort by date ascending
+    events.sort((a, b) => {
+      const dateA = new Date(a.data.date);
+      const dateB = new Date(b.data.date);
+      return dateA - dateB;
+    });
 
     // Find the My Events section in the HTML
     // Look for the h3 that says "My Events" and insert after it
@@ -465,7 +483,7 @@ async function loadUserEvents(userId) {
     }
 
     // Check if user has any events
-    if (querySnapshot.empty) {
+    if (events.length === 0) {
       const noEventsMsg = document.createElement('p');
       noEventsMsg.style.cssText = 'text-align:center; padding:20px; color:#5A6C7A; font-style:italic;';
       noEventsMsg.textContent = 'No events created yet. Create your first event!';
@@ -474,13 +492,12 @@ async function loadUserEvents(userId) {
     }
 
     // Display each event
-    querySnapshot.forEach((docSnap) => {
-      const event = docSnap.data();
-      const eventCard = createMyEventCard(event, docSnap.id);
+    events.forEach(({ id, data }) => {
+      const eventCard = createMyEventCard(data, id);
       myEventsHeading.insertAdjacentElement('afterend', eventCard);
     });
 
-    console.log(`Loaded ${querySnapshot.size} events for user`);
+    console.log(`Loaded ${events.length} events for user`);
 
   } catch (error) {
     console.error("Error loading user events:", error);
@@ -536,8 +553,125 @@ function createMyEventCard(event, eventId) {
   viewBtn.className = 'btn view';
   viewBtn.textContent = 'View';
   viewBtn.onclick = () => {
-    // For now, just show alert. Later we'll create event details page
-    alert(`Event: ${event.eventName}\nDate: ${formattedDate}\nLocation: ${event.address}\nParticipants: ${event.participants?.length || 0}/${event.maxParticipants}`);
+    openEventModal(event);
+  };
+
+  actionsDiv.appendChild(viewBtn);
+
+  connItem.appendChild(eventIcon);
+  connItem.appendChild(infoDiv);
+  connItem.appendChild(actionsDiv);
+
+  return connItem;
+}
+
+
+
+// =======================
+// LOAD JOINED EVENTS
+// =======================
+async function loadJoinedEvents(userId) {
+  try {
+    // Query events where the current user is in the participants array
+    const eventsRef = collection(db, "events");
+    const q = query(
+      eventsRef, 
+      where("participants", "array-contains", userId),
+      orderBy("date", "asc")
+    );
+    
+    const querySnapshot = await getDocs(q);
+
+    // Find the Joined Events section in the HTML
+    const joinedEventsHeading = Array.from(document.querySelectorAll('.panel h3'))
+      .find(h3 => h3.textContent.trim() === 'Joined Events');
+
+    if (!joinedEventsHeading) {
+      console.warn("Joined Events heading not found in HTML");
+      return;
+    }
+
+    // Filter out events created by the user (those are in "My Events")
+    const joinedEvents = [];
+    querySnapshot.forEach((docSnap) => {
+      const event = docSnap.data();
+      if (event.creatorId !== userId) {
+        joinedEvents.push({ id: docSnap.id, ...event });
+      }
+    });
+
+    // Check if user has joined any events
+    if (joinedEvents.length === 0) {
+      const noEventsMsg = document.createElement('p');
+      noEventsMsg.style.cssText = 'text-align:center; padding:20px; color:#5A6C7A; font-style:italic;';
+      noEventsMsg.textContent = 'No joined events yet. Browse events to join!';
+      joinedEventsHeading.insertAdjacentElement('afterend', noEventsMsg);
+      return;
+    }
+
+    // Display each joined event
+    joinedEvents.forEach(({ id, ...event }) => {
+      const eventCard = createJoinedEventCard(event, id);
+      joinedEventsHeading.insertAdjacentElement('afterend', eventCard);
+    });
+
+    console.log(`Loaded ${joinedEvents.length} joined events for user`);
+
+  } catch (error) {
+    console.error("Error loading joined events:", error);
+  }
+}
+
+// Create an event card for Joined Events section
+function createJoinedEventCard(event, eventId) {
+  const connItem = document.createElement('div');
+  connItem.className = 'conn-item';
+  connItem.dataset.eventId = eventId;
+
+  // Format date
+  const dateObj = new Date(event.date);
+  const formattedDate = dateObj.toLocaleDateString('en-US', { 
+    month: 'short', 
+    day: 'numeric', 
+    year: 'numeric' 
+  });
+
+  // Extract city from address
+  const addressParts = event.address.split(',');
+  const cityLocation = addressParts.length > 1 ? 
+    addressParts[addressParts.length - 2].trim() : 
+    event.address.split(',')[0];
+
+  // Create icon for joined events (different color)
+  const eventIcon = document.createElement('div');
+  eventIcon.style.cssText = `
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #F5A623 0%, #E89610 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    border: 3px solid white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  `;
+  eventIcon.textContent = '🎉';
+
+  const infoDiv = document.createElement('div');
+  infoDiv.innerHTML = `
+    <div class="conn-name">${event.eventName}</div>
+    <div class="conn-meta">${formattedDate} • ${cityLocation}</div>
+  `;
+
+  const actionsDiv = document.createElement('div');
+  actionsDiv.className = 'conn-actions';
+  
+  const viewBtn = document.createElement('button');
+  viewBtn.className = 'btn view';
+  viewBtn.textContent = 'View';
+  viewBtn.onclick = () => {
+    openEventModal(event);
   };
 
   actionsDiv.appendChild(viewBtn);
@@ -717,3 +851,67 @@ if (avatarInput && avatarEl) {
     }
   };
 }
+
+
+// ============================================
+// EVENT DETAILS MODAL
+// ============================================
+
+function openEventModal(event) {
+  const modal = document.getElementById("event-modal");
+
+  // Format date
+  const dateObj = new Date(event.date);
+  const formattedDate = dateObj.toLocaleDateString('en-US', { 
+    month: 'long', 
+    day: 'numeric', 
+    year: 'numeric' 
+  });
+
+  // Populate modal
+  document.getElementById("modal-event-name").textContent = event.eventName;
+  document.getElementById("modal-date").textContent = formattedDate;
+  document.getElementById("modal-location").textContent = event.address;
+  
+  const participantCount = event.participants?.length || 0;
+  document.getElementById("modal-participants").textContent = `${participantCount}/${event.maxParticipants} people`;
+  
+  document.getElementById("modal-creator").textContent = event.creatorName || "Anonymous";
+  document.getElementById("modal-description").textContent = event.description || "No description provided.";
+
+  // Show modal
+  modal.classList.add("show");
+  modal.setAttribute("aria-hidden", "false");
+}
+
+function closeEventModal() {
+  const modal = document.getElementById("event-modal");
+  modal.classList.remove("show");
+  modal.setAttribute("aria-hidden", "true");
+}
+
+// Close modal button
+const modalCloseBtn = document.getElementById("modal-close-btn");
+if (modalCloseBtn) {
+  modalCloseBtn.addEventListener("click", closeEventModal);
+}
+
+// Close button in actions
+const closeModalBtn = document.getElementById("close-modal-btn");
+if (closeModalBtn) {
+  closeModalBtn.addEventListener("click", closeEventModal);
+}
+
+// Close modal when clicking overlay
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('modal-overlay')) {
+    closeEventModal();
+  }
+});
+
+// Close modal with Escape key
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closeEventModal();
+  }
+});

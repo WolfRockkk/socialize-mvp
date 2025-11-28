@@ -35,7 +35,6 @@ body {
   color: white;
   font-size: 2rem;
   font-weight: 700;
-  
 }
 
 .brand-badge {
@@ -388,6 +387,226 @@ body {
 }
 
 /* =====================
+   EVENT DETAILS MODAL
+   ===================== */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 61, 91, 0.8);
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  position: relative;
+  background: white;
+  border-radius: 25px;
+  padding: 40px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: modalSlideIn 0.3s ease;
+  z-index: 2001;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  font-size: 2.5rem;
+  color: #003D5B;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+  background: #F5EBE0;
+  transform: rotate(90deg);
+}
+
+.modal-event-name {
+  color: #003D5B;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  padding-right: 40px;
+}
+
+.modal-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.modal-detail-row {
+  display: flex;
+  align-items: start;
+  gap: 15px;
+  padding: 15px;
+  background: #F9F9F9;
+  border-radius: 12px;
+  border: 2px solid #E0E0E0;
+}
+
+.modal-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.modal-label {
+  font-size: 0.85rem;
+  color: #5A6C7A;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.modal-value {
+  font-size: 1.05rem;
+  color: #003D5B;
+  font-weight: 600;
+}
+
+.modal-description-section {
+  margin-bottom: 30px;
+  padding: 20px;
+  background: #F9F9F9;
+  border-radius: 15px;
+  border: 2px solid #E0E0E0;
+}
+
+.modal-section-title {
+  color: #003D5B;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.modal-description {
+  color: #3A4B7B;
+  line-height: 1.7;
+  font-size: 1rem;
+  white-space: pre-wrap;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.btn-join {
+  flex: 1;
+  padding: 16px 32px;
+  background: #F5A623;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(245, 166, 35, 0.4);
+}
+
+.btn-join:hover {
+  background: #E89610;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(245, 166, 35, 0.5);
+}
+
+.btn-leave {
+  flex: 1;
+  padding: 16px 32px;
+  background: #E74C3C;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+}
+
+.btn-leave:hover {
+  background: #C0392B;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(231, 76, 60, 0.5);
+}
+
+.btn-disabled {
+  flex: 1;
+  padding: 16px 32px;
+  background: #CCCCCC;
+  color: #666666;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: not-allowed;
+}
+
+/* View Details Button */
+.btn-view-details {
+  padding: 8px 20px;
+  background: #F5A623;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: auto;
+}
+
+.btn-view-details:hover {
+  background: #E89610;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(245, 166, 35, 0.4);
+}
+
+/* =====================
    RESPONSIVE DESIGN
    ===================== */
 @media (max-width: 1200px) {
@@ -455,5 +674,18 @@ body {
   
   .event-tags {
     margin-left: 0;
+  }
+  
+  .modal-content {
+    padding: 30px;
+    max-width: 95%;
+  }
+  
+  .modal-event-name {
+    font-size: 1.6rem;
+  }
+  
+  .modal-actions {
+    flex-direction: column;
   }
 }

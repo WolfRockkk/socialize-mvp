@@ -16,7 +16,7 @@
 </head>
 <body>
 
-  <!-- NAVBAR (same as profile, Find Event active) -->
+  <!-- NAVBAR -->
   <div class="navbar">
     <div class="brand">
       <div class="brand-badge"></div>
@@ -69,107 +69,85 @@
         </div>
       </div>
 
-      <!-- Event list (dummy data for now) -->
+      <!-- Event list (loaded dynamically) -->
       <div class="event-list">
-
-        <!-- EVENT CARD 1 -->
-        <article class="event-card">
-          <div class="event-main">
-            <div class="event-title-row">
-              <span class="event-arrow">▾</span>
-              <h3 class="event-title">Board Games &amp; Drinks – This Saturday</h3>
-            </div>
-            <div class="event-meta-row">
-              <div class="event-date">
-                <span class="event-date-icon">📅</span>
-                <span>Nov 28, 2025 • 19:00</span>
-              </div>
-              <div class="event-location">
-                <span>Ottawa, ON</span>
-              </div>
-            </div>
-          </div>
-          <div class="event-tags">
-            <span class="tag-pill">Games</span>
-            <span class="tag-pill">Drinks</span>
-            <span class="tag-pill">Networking</span>
-          </div>
-        </article>
-
-        <!-- EVENT CARD 2 -->
-        <article class="event-card">
-          <div class="event-main">
-            <div class="event-title-row">
-              <span class="event-arrow">▾</span>
-              <h3 class="event-title">Morning Coffee &amp; Language Exchange</h3>
-            </div>
-            <div class="event-meta-row">
-              <div class="event-date">
-                <span class="event-date-icon">📅</span>
-                <span>Dec 3, 2025 • 10:30</span>
-              </div>
-              <div class="event-location">
-                <span>Downtown Ottawa</span>
-              </div>
-            </div>
-          </div>
-          <div class="event-tags">
-            <span class="tag-pill">Coffee</span>
-            <span class="tag-pill">Languages</span>
-            <span class="tag-pill">Chatting</span>
-          </div>
-        </article>
-
-        <!-- EVENT CARD 3 -->
-        <article class="event-card">
-          <div class="event-main">
-            <div class="event-title-row">
-              <span class="event-arrow">▾</span>
-              <h3 class="event-title">Sunday Walk &amp; Photo Meetup</h3>
-            </div>
-            <div class="event-meta-row">
-              <div class="event-date">
-                <span class="event-date-icon">📅</span>
-                <span>Dec 7, 2025 • 14:00</span>
-              </div>
-              <div class="event-location">
-                <span>Rideau Canal, Ottawa</span>
-              </div>
-            </div>
-          </div>
-          <div class="event-tags">
-            <span class="tag-pill">Outdoors</span>
-            <span class="tag-pill">Photography</span>
-            <span class="tag-pill">Walking</span>
-          </div>
-        </article>
-    
+        <p style="text-align:center; padding:40px; color:#003D5B;">Loading events...</p>
       </div>
     </section>
-
-    
 
     <!-- RIGHT: MAP -->
     <section class="find-right">
       <h2>Events in My Location</h2>
 
       <div class="card map-card">
-        <div id="map"> <!-- Google Map goes here later --> </div>
-        <div class="map-hint">
-          Map preview. Later you’ll show nearby events as pins here using your Google Maps API.
-        </div>
+        <div id="map"></div>
       </div>
     </section>
 
   </div>
 
-  <!-- Optional JS for future map / filters -->
+  <!-- EVENT DETAILS MODAL -->
+  <div id="event-modal" class="modal" aria-hidden="true">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <button class="modal-close" id="modal-close-btn">&times;</button>
+      
+      <h2 id="modal-event-name" class="modal-event-name">Event Name</h2>
+      
+      <div class="modal-details">
+        <div class="modal-detail-row">
+          <span class="modal-icon">📅</span>
+          <div>
+            <div class="modal-label">Date & Time</div>
+            <div id="modal-date" class="modal-value">Nov 28, 2025</div>
+          </div>
+        </div>
+
+        <div class="modal-detail-row">
+          <span class="modal-icon">📍</span>
+          <div>
+            <div class="modal-label">Location</div>
+            <div id="modal-location" class="modal-value">Address here</div>
+          </div>
+        </div>
+
+        <div class="modal-detail-row">
+          <span class="modal-icon">👤</span>
+          <div>
+            <div class="modal-label">Participants</div>
+            <div id="modal-participants" class="modal-value">5/10 people</div>
+          </div>
+        </div>
+
+        <div class="modal-detail-row">
+          <span class="modal-icon">👨‍💼</span>
+          <div>
+            <div class="modal-label">Organized by</div>
+            <div id="modal-creator" class="modal-value">Creator Name</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-description-section">
+        <h3 class="modal-section-title">Description</h3>
+        <p id="modal-description" class="modal-description">Event description will appear here...</p>
+      </div>
+
+      <div class="modal-actions">
+        <button id="join-event-btn" class="btn btn-join">Join Event</button>
+        <button id="leave-event-btn" class="btn btn-leave" style="display:none;">Leave Event</button>
+        <button id="event-full-btn" class="btn btn-disabled" style="display:none;" disabled>Event Full</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS -->
+   <script type="module" src="assets/js/find-event.js"></script>
   <script type="module" src="assets/js/main.js"></script>
-  <!-- Auth Guard -->
   <script type="module" src="assets/js/auth-guard.js"></script>
-  <script type="module"  src="assets/js/find-event.js"></script>
+  
   <script
-    src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap&loading=async"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqqWeX_gf0uPwfJInrEO4urYpW8IngRzs&callback=initMap&loading=async"
     async
   ></script>
 

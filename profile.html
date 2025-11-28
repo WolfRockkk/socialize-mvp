@@ -144,18 +144,12 @@
           <button class="btn remove">Remove</button>
         </div>
       </div>
+
       <h3>My Events</h3>
-        <div class="conn-item">
-          <div>
-            <img src="https://picsum.photos/100/100?random=13" alt="">
-            <div>
-            <div class="conn-name">UFC Night at my place</div>
-            <div class="conn-meta">Ottawa, ON</div>
-          </div>
-          <div class="conn-actions">
-          <button class="btn view">View</button>
-          </div>
-        </div>
+        <!-- My Events will be loaded here dynamically -->
+
+      <h3 style="margin-top: 30px;">Joined Events</h3>
+        <!-- Joined Events will be loaded here dynamically -->
 
       
       
@@ -176,6 +170,60 @@
       </div>
     </div>
   </div>
+
+  <!-- EVENT DETAILS MODAL -->
+  <div id="event-modal" class="modal" aria-hidden="true">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <button class="modal-close" id="modal-close-btn">&times;</button>
+      
+      <h2 id="modal-event-name" class="modal-event-name">Event Name</h2>
+      
+      <div class="modal-details">
+        <div class="modal-detail-row">
+          <span class="modal-icon">📅</span>
+          <div>
+            <div class="modal-label">Date & Time</div>
+            <div id="modal-date" class="modal-value">Nov 28, 2025</div>
+          </div>
+        </div>
+
+        <div class="modal-detail-row">
+          <span class="modal-icon">📍</span>
+          <div>
+            <div class="modal-label">Location</div>
+            <div id="modal-location" class="modal-value">Address here</div>
+          </div>
+        </div>
+
+        <div class="modal-detail-row">
+          <span class="modal-icon">👤</span>
+          <div>
+            <div class="modal-label">Participants</div>
+            <div id="modal-participants" class="modal-value">5/10 people</div>
+          </div>
+        </div>
+
+        <div class="modal-detail-row">
+          <span class="modal-icon">👨‍💼</span>
+          <div>
+            <div class="modal-label">Organized by</div>
+            <div id="modal-creator" class="modal-value">Creator Name</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-description-section">
+        <h3 class="modal-section-title">Description</h3>
+        <p id="modal-description" class="modal-description">Event description will appear here...</p>
+      </div>
+
+      <div class="modal-actions">
+        <button id="close-modal-btn" class="btn btn-close-modal">Close</button>
+      </div>
+    </div>
+  </div>
+
 
   <!-- Firebase -->
   <script type="module" src="assets/js/main.js"></script>
